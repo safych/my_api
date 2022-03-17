@@ -1,9 +1,14 @@
+require 'disks_controller'
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :update, :destroy]
 
   # GET /songs
   def index
-    @songs = Song.all
+    if params[:disk_id].present?
+      @songs = Song.where("disk_id = ?", params[:disk_id])
+    else
+      @songs = Song.all
+    end
 
     render json: @songs
   end
@@ -13,14 +18,27 @@ class SongsController < ApplicationController
     render json: @song
   end
 
+  def cleanup string
+    string.titleize
+  end
+
   # POST /songs
   def create
-    @song = Song.new(song_params)
+    disk = Disk.find_by(id: song_params[:disk_id])
 
-    if @song.save
-      render json: @song, status: :created, location: @song
+    if disk.number_of_songs > 0
+      @song = Song.new(song_params)
+      if @song.save
+        disk.number_of_songs -= 1
+        disk.save
+        render json: @song, status: :created, location: @song
+      else
+        render json: @song.errors, status: :unprocessable_entity
+      end
     else
-      render json: @song.errors, status: :unprocessable_entity
+      render status: 200, json: {
+        error: "Немає місця на диску!!!"
+      }
     end
   end
 
@@ -46,6 +64,6 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      params.require(:song).permit(:name, :text, :rating)
+      params.require(:song).permit(:name, :text, :group_id, :disk_id)
     end
 end

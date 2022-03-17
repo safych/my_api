@@ -46,6 +46,6 @@ class DisksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def disk_params
-      params.require(:disk).permit(:name, :songs)
+      params.require(:disk).permit(:name, :number_of_songs)
     end
 end

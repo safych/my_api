@@ -17,10 +17,16 @@ class RatingsController < ApplicationController
   def create
     @rating = Rating.new(rating_params)
 
-    if @rating.save
-      render json: @rating, status: :created, location: @rating
+    if rating_params[:number] <= 10 and rating_params[:number] > -1
+      if @rating.save
+        render json: @rating, status: :created, location: @rating
+      else
+        render json: @rating.errors, status: :unprocessable_entity
+      end
     else
-      render json: @rating.errors, status: :unprocessable_entity
+      render status: 200, json: {
+        error: "Невірно введено рейтинг пісні!!!"
+      }
     end
   end
 
@@ -46,6 +52,6 @@ class RatingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rating_params
-      params.require(:rating).permit(:number)
+      params.require(:rating).permit(:number, :song_id)
     end
 end
