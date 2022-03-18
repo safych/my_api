@@ -15,12 +15,17 @@ class SingersController < ApplicationController
 
   # POST /singers
   def create
-    @singer = Singer.new(singer_params)
-
-    if @singer.save
-      render json: @singer, status: :created, location: @singer
+    if params[:age].to_i >= 5 and params[:age].to_i <= 80
+      @singer = Singer.new(singer_params)
+      if @singer.save
+        render json: @singer, status: :created, location: @singer
+      else
+        render json: @singer.errors, status: :unprocessable_entity
+      end
     else
-      render json: @singer.errors, status: :unprocessable_entity
+      render status: 200, json: {
+        error: "Некоректний вік співака!!!"
+      }
     end
   end
 
