@@ -1,0 +1,1110 @@
+---
+openapi: 3.0.1
+info:
+  title: API information system of a recording company
+  version: v1
+paths:
+  "/disks":
+    post:
+      summary: Create a disk
+      tags:
+      - Disks
+      parameters: []
+      responses:
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                number_of_songs:
+                  type: integer
+              required:
+              - name
+              - number_of_songs
+    get:
+      summary: Display all disks
+      tags:
+      - Disks
+      responses:
+        '200':
+          description: disk found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  number_of_songs:
+                    type: integer
+                required:
+                - id
+                - name
+                - number_of_songs
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  number_of_songs:
+                    type: integer
+                required:
+                - id
+                - name
+                - number_of_songs
+        '404':
+          description: disk not found
+        '406':
+          description: unsupported accept header
+  "/disks/{id}":
+    get:
+      summary: Display a disk by id
+      tags:
+      - Disks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: disk found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  number_of_songs:
+                    type: integer
+                required:
+                - id
+                - name
+                - number_of_songs
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  number_of_songs:
+                    type: integer
+                required:
+                - id
+                - name
+                - number_of_songs
+        '404':
+          description: disk not found
+        '406':
+          description: unsupported accept header
+    put:
+      summary: Renewal a disk
+      tags:
+      - Disks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '404':
+          description: disk not found
+        '406':
+          description: unsupported accept header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                number_of_songs:
+                  type: integer
+              required:
+              - id
+              - name
+              - number_of_songs
+    delete:
+      summary: Remove a disk
+      tags:
+      - Disks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: disk found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  number_of_songs:
+                    type: integer
+                required:
+                - id
+                - name
+                - number_of_songs
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  number_of_songs:
+                    type: integer
+                required:
+                - id
+                - name
+                - number_of_songs
+        '404':
+          description: disk not found
+        '406':
+          description: unsupported accept header
+  "/groups":
+    post:
+      summary: Create a group
+      tags:
+      - Groups
+      parameters: []
+      responses:
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                country:
+                  type: string
+              required:
+              - name
+              - country
+    get:
+      summary: Display all groups
+      tags:
+      - Groups
+      responses:
+        '200':
+          description: group found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  country:
+                    type: string
+                required:
+                - id
+                - name
+                - country
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  country:
+                    type: string
+                required:
+                - id
+                - name
+                - country
+        '404':
+          description: group not found
+        '406':
+          description: unsupported accept header
+  "/groups/{id}":
+    get:
+      summary: Display a group by id
+      tags:
+      - Groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: group found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  country:
+                    type: string
+                required:
+                - id
+                - name
+                - country
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  country:
+                    type: string
+                required:
+                - id
+                - name
+                - country
+        '404':
+          description: group not found
+        '406':
+          description: unsupported accept header
+    put:
+      summary: Renewal a group
+      tags:
+      - Groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '404':
+          description: group not found
+        '406':
+          description: unsupported accept header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                country:
+                  type: string
+              required:
+              - id
+              - name
+              - country
+    delete:
+      summary: Remove a group
+      tags:
+      - Groups
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: group found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  country:
+                    type: string
+                required:
+                - id
+                - name
+                - country
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  country:
+                    type: string
+                required:
+                - id
+                - name
+                - country
+        '404':
+          description: group not found
+        '406':
+          description: unsupported accept header
+  "/ratings":
+    post:
+      summary: Create a rating
+      tags:
+      - Ratings
+      parameters: []
+      responses:
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                number:
+                  type: integer
+                song_id:
+                  type: integer
+              required:
+              - number
+              - song_id
+    get:
+      summary: Display all ratings
+      tags:
+      - Ratings
+      responses:
+        '200':
+          description: rating found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  number:
+                    type: integer
+                  song_id:
+                    type: integer
+                required:
+                - id
+                - number
+                - song_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  number:
+                    type: integer
+                  song_id:
+                    type: integer
+                required:
+                - id
+                - number
+                - song_id
+        '404':
+          description: rating not found
+        '406':
+          description: unsupported accept header
+  "/ratings/{id}":
+    get:
+      summary: Display a rating by id
+      tags:
+      - Ratings
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: rating found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  number:
+                    type: integer
+                  song_id:
+                    type: integer
+                required:
+                - id
+                - number
+                - song_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  number:
+                    type: integer
+                  song_id:
+                    type: integer
+                required:
+                - id
+                - number
+                - song_id
+        '404':
+          description: rating not found
+        '406':
+          description: unsupported accept header
+    put:
+      summary: Renewal a rating
+      tags:
+      - Ratings
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '404':
+          description: rating not found
+        '406':
+          description: unsupported accept header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                number:
+                  type: integer
+                song_id:
+                  type: integer
+              required:
+              - id
+              - number
+              - song_id
+    delete:
+      summary: Remove a rating
+      tags:
+      - Ratings
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: rating found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  number:
+                    type: integer
+                  song_id:
+                    type: integer
+                required:
+                - id
+                - number
+                - song_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  number:
+                    type: integer
+                  song_id:
+                    type: integer
+                required:
+                - id
+                - number
+                - song_id
+        '404':
+          description: rating not found
+        '406':
+          description: unsupported accept header
+  "/singers":
+    post:
+      summary: Create a singer
+      tags:
+      - Singers
+      parameters: []
+      responses:
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                surname:
+                  type: string
+                age:
+                  type: integer
+                status:
+                  type: string
+                country:
+                  type: string
+                group_id:
+                  type: integer
+              required:
+              - name
+              - surname
+              - age
+              - status
+              - country
+              - group_id
+    get:
+      summary: Display all singers
+      tags:
+      - Singers
+      responses:
+        '200':
+          description: singer found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  surname:
+                    type: string
+                  age:
+                    type: integer
+                  status:
+                    type: string
+                  country:
+                    type: string
+                  group_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - surname
+                - age
+                - status
+                - country
+                - group_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  surname:
+                    type: string
+                  age:
+                    type: integer
+                  status:
+                    type: string
+                  country:
+                    type: string
+                  group_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - surname
+                - age
+                - status
+                - country
+                - group_id
+        '404':
+          description: singer not found
+        '406':
+          description: unsupported accept header
+  "/singers/{id}":
+    get:
+      summary: Display a singer by id
+      tags:
+      - Singers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: singer found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  surname:
+                    type: string
+                  age:
+                    type: integer
+                  status:
+                    type: string
+                  country:
+                    type: string
+                  group_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - surname
+                - age
+                - status
+                - country
+                - group_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  surname:
+                    type: string
+                  age:
+                    type: integer
+                  status:
+                    type: string
+                  country:
+                    type: string
+                  group_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - surname
+                - age
+                - status
+                - country
+                - group_id
+        '404':
+          description: singer not found
+        '406':
+          description: unsupported accept header
+    put:
+      summary: Renewal a singer
+      tags:
+      - Singers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '404':
+          description: singer not found
+        '406':
+          description: unsupported accept header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                surname:
+                  type: string
+                age:
+                  type: integer
+                status:
+                  type: string
+                country:
+                  type: string
+                group_id:
+                  type: integer
+              required:
+              - id
+              - name
+              - surname
+              - age
+              - status
+              - country
+              - group_id
+    delete:
+      summary: Remove a singer
+      tags:
+      - Singers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: singer found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  surname:
+                    type: string
+                  age:
+                    type: integer
+                  status:
+                    type: string
+                  country:
+                    type: string
+                  group_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - surname
+                - age
+                - status
+                - country
+                - group_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  surname:
+                    type: string
+                  age:
+                    type: integer
+                  status:
+                    type: string
+                  country:
+                    type: string
+                  group_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - surname
+                - age
+                - status
+                - country
+                - group_id
+        '404':
+          description: singer not found
+        '406':
+          description: unsupported accept header
+  "/songs":
+    post:
+      summary: Create a song
+      tags:
+      - Songs
+      parameters: []
+      responses:
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                text:
+                  type: string
+                group_id:
+                  type: integer
+                disk_id:
+                  type: integer
+              required:
+              - name
+              - text
+              - group_id
+              - disk_id
+    get:
+      summary: Display all songs
+      tags:
+      - Songs
+      responses:
+        '200':
+          description: song found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  text:
+                    type: string
+                  group_id:
+                    type: integer
+                  disk_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - text
+                - group_id
+                - disk_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  text:
+                    type: string
+                  group_id:
+                    type: integer
+                  disk_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - text
+                - group_id
+                - disk_id
+        '404':
+          description: song not found
+        '406':
+          description: unsupported accept header
+  "/songs/{id}":
+    get:
+      summary: Display a song by id
+      tags:
+      - Songs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: song found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  text:
+                    type: string
+                  group_id:
+                    type: integer
+                  disk_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - text
+                - group_id
+                - disk_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  text:
+                    type: string
+                  group_id:
+                    type: integer
+                  disk_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - text
+                - group_id
+                - disk_id
+        '404':
+          description: song not found
+        '406':
+          description: unsupported accept header
+    put:
+      summary: Renewal a song
+      tags:
+      - Songs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '404':
+          description: song not found
+        '406':
+          description: unsupported accept header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                text:
+                  type: string
+                group_id:
+                  type: integer
+                disk_id:
+                  type: integer
+              required:
+              - id
+              - name
+              - text
+              - group_id
+              - disk_id
+    delete:
+      summary: Remove a song
+      tags:
+      - Songs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: song found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  text:
+                    type: string
+                  group_id:
+                    type: integer
+                  disk_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - text
+                - group_id
+                - disk_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  text:
+                    type: string
+                  group_id:
+                    type: integer
+                  disk_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - text
+                - group_id
+                - disk_id
+        '404':
+          description: song not found
+        '406':
+          description: unsupported accept header
+  "/songs?disk_id={disk_id}":
+    get:
+      summary: Display a song by disk id
+      tags:
+      - Songs
+      parameters:
+      - name: disk_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: song found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  text:
+                    type: string
+                  group_id:
+                    type: integer
+                  disk_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - text
+                - group_id
+                - disk_id
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  text:
+                    type: string
+                  group_id:
+                    type: integer
+                  disk_id:
+                    type: integer
+                required:
+                - id
+                - name
+                - text
+                - group_id
+                - disk_id
+        '404':
+          description: song not found
+        '406':
+          description: unsupported accept header

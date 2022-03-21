@@ -3,7 +3,6 @@ require 'swagger_helper'
 RSpec.describe 'api/ratings', type: :request do
 
   path '/ratings' do
-
     post 'Create a rating' do
       tags 'Ratings'
       consumes 'application/json'
@@ -27,10 +26,99 @@ RSpec.describe 'api/ratings', type: :request do
     end
   end
 
-  path '/ratings/{id}' do
+  path '/ratings' do
+    get 'Display all ratings' do
+      tags 'Ratings'
+      produces 'application/json', 'application/xml'
 
-    get 'Retrieves a rating' do
-      tags 'Ratings', 'Another Tag'
+      response '200', 'rating found' do
+        schema type: :object,
+          properties: {
+            id: { type: :integer },
+            number: { type: :integer },
+            song_id: { type: :integer }
+          },
+          required: [ 'id', 'number', 'song_id' ]
+
+        let(:id) { Rating.create(number: 10, song_id: 1).id }
+        run_test!
+      end
+
+      response '404', 'rating not found' do
+        let(:id) { 'invalid' }
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        let(:'Accept') { 'application/Fire' }
+        run_test!
+      end
+    end
+  end
+
+  path '/ratings/{id}' do
+    get 'Display a rating by id' do
+      tags 'Ratings'
+      produces 'application/json', 'application/xml'
+      parameter name: :id, in: :path, type: :string
+
+      response '200', 'rating found' do
+        schema type: :object,
+          properties: {
+            id: { type: :integer },
+            number: { type: :integer },
+            song_id: { type: :integer }
+          },
+          required: [ 'id', 'number', 'song_id' ]
+
+        let(:id) { Rating.create(number: 10, song_id: 1).id }
+        run_test!
+      end
+
+      response '404', 'rating not found' do
+        let(:id) { 'invalid' }
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        let(:'Accept') { 'application/Fire' }
+        run_test!
+      end
+    end
+  end
+
+  path '/ratings/{id}' do
+    put 'Renewal a rating' do
+      tags 'Ratings'
+      produces 'application/json', 'application/xml'
+      parameter name: :id, in: :path, type: :string
+
+      response '200', 'rating found' do
+        consumes 'application/json'
+        parameter name: :rating, in: :body, schema: {
+          properties: {
+            number: { type: :integer },
+            song_id: { type: :integer }
+          },
+          required: [ 'id', 'number', 'song_id' ]
+        }
+      end
+
+      response '404', 'rating not found' do
+        let(:id) { 'invalid' }
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        let(:'Accept') { 'application/Fire' }
+        run_test!
+      end
+    end
+  end
+
+  path '/ratings/{id}' do
+    delete 'Remove a rating' do
+      tags 'Ratings'
       produces 'application/json', 'application/xml'
       parameter name: :id, in: :path, type: :string
 
